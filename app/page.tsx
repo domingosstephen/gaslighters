@@ -9,49 +9,46 @@ import { products } from "@/lib/products";
 export default function Home() {
   return (
     <>
-      {/* Hero — ink background */}
-      <section className="bg-ink py-16 md:py-24 lg:py-32">
-        <Container>
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
-            <div className="lg:col-span-7">
-              <Eyebrow className="[&_span]:text-sand">
+      {/* Hero — full background image with overlay */}
+      <section className="relative">
+        {/* Background image */}
+        <Image
+          src="/hero-bg.jpg"
+          alt="Gas lighters product showcase"
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority
+        />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-ink/70" />
+
+        {/* Content */}
+        <div className="relative z-10 pt-28 pb-16 md:pt-32 md:pb-24 lg:pt-36 lg:pb-28">
+          <Container>
+            <div className="mx-auto max-w-3xl text-center">
+              <span className="inline-block rounded-full border border-paper/30 px-4 py-1.5 text-[0.75rem] font-medium uppercase tracking-widest text-paper/80">
                 Wholesale only &middot; MOQ 1,000 units
-              </Eyebrow>
-              <h1 className="text-display mt-4 text-[length:var(--text-display)] text-paper">
+              </span>
+              <h1 className="text-display mt-6 text-[length:var(--text-display)] text-paper">
                 Gas lighters, shipped by the pallet.
               </h1>
-              <p className="mt-5 max-w-lg text-[length:var(--text-body)] text-sand md:text-[1.0625rem]">
+              <p className="mx-auto mt-5 max-w-xl text-[length:var(--text-body)] text-paper/70 md:text-[1.0625rem]">
                 We supply gas lighters to distributors, retailers, convenience chains, and
                 promotional buyers across 30+ countries. No retail. No published prices. Just
                 fast quotes and reliable shipping.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button variant="ember" size="hero" href="/quote">
+              <div className="mt-8 flex flex-wrap justify-center gap-4">
+                <Button variant="ember" size="hero" href="/quote" className="rounded-full">
                   Request a quote
                 </Button>
-                <Button variant="ghost" size="hero" href="/products" className="border-paper text-paper hover:bg-paper/10 hover:opacity-100">
+                <Button variant="ghost" size="hero" href="/products" className="rounded-full border-paper/40 text-paper hover:bg-paper/10 hover:opacity-100">
                   See the catalog
                 </Button>
               </div>
             </div>
-
-            <div className="lg:col-span-5">
-              <div className="relative aspect-[4/5] bg-paper/10">
-                <Image
-                  src="/products/lk-ref-01.jpg"
-                  alt="Classic Refillable Pocket Lighter"
-                  fill
-                  className="object-contain p-6"
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  priority
-                />
-              </div>
-              <p className="text-spec mt-2 text-center text-[0.75rem] text-sand">
-                LK-REF-01 &middot; 82mm &middot; Refillable
-              </p>
-            </div>
-          </div>
-        </Container>
+          </Container>
+        </div>
       </section>
 
       {/* 01 / 04 — PRODUCTS */}
