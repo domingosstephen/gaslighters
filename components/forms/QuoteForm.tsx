@@ -1,0 +1,172 @@
+"use client";
+
+import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { quoteSchema, type QuoteFormData } from "@/lib/validation";
+import { Field } from "@/components/ui/Field";
+import { Button } from "@/components/ui/Button";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+
+export function QuoteForm() {
+  const searchParams = useSearchParams();
+  const prefillProduct = searchParams.get("product") || "";
+  const [submitted, setSubmitted] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState("");
+  const [serverError, setServerError] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<QuoteFormData>({
+    resolver: zodResolver(quoteSchema),
+    defaultValues: { honeypot: "", productsOfInterest: prefillProduct },
+  });
+
+  const onSubmit = async (data: QuoteFormData) => {
+    setServerError("");
+    try {
+      const res = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        const json = await res.json().catch(() => null);
+        throw new Error(json?.error || "Something went wrong.");
+      }
+
+      setSubmittedEmail(data.email);
+      setSubmitted(true);
+    } catch (err) {
+      setServerError(
+        err instanceof Error ? err.message : "Something went wrong."
+      );
+    }
+  };
+
+  if (submitted) {
+    return (
+      <div className="py-16 md:py-24">
+        <Eyebrow>Quote requested</Eyebrow>
+        <h2 className="text-h2 mt-4 text-[length:var(--text-h2)]">
+          We&apos;ll be in touch within one business day.
+        </h2>
+        <p className="mt-4 text-steel">
+          A confirmation will be sent to{" "}
+          <span className="text-spec text-ink">{submittedEmail}</span>. If you
+          don&apos;t hear from us, check your spam folder or email us directly.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <div className="grid gap-6 md:grid-cols-2">
+        <Field
+          label="Company name"
+          {...register("companyName")}
+          error={errors.companyName?.message}
+          placeholder="Acme Distributors Ltd"
+        />
+        <Field
+          label="Contact name"
+          {...register("contactName")}
+          error={errors.contactName?.message}
+          placeholder="Jane Smith"
+        />
+        <Field
+          label="Email"
+          type="email"
+          {...register("email")}
+          error={errors.email?.message}
+          placeholder="jane@acme.com"
+        />
+        <Field
+          label="Phone (optional)"
+          type="tel"
+          {...register("phone")}
+          error={errors.phone?.message}
+          placeholder="+44 20 1234 5678"
+        />
+        <Field
+          label="Country"
+          {...register("country")}
+          error={errors.country?.message}
+          placeholder="GB"
+        />
+        <Field
+          label="Estimated quantity"
+          {...register("estimatedQuantity")}
+          error={errors.estimatedQuantity?.message}
+          placeholder="5,000 units"
+        />
+      </div>
+
+      <div className="mt-6">
+        <Field
+          label="Products of interest"
+          as="textarea"
+          {...register("productsOfInterest")}
+          error={errors.productsOfInterest?.message}
+          placeholder="BBQ lighters and refillable torches, ~5,000 units"
+        />
+      </div>
+
+      <div className="mt-6">
+        <Field
+          label="Target lead time (optional)"
+          {...register("targetLeadTime")}
+          error={errors.targetLeadTime?.message}
+          placeholder="8 weeks"
+        />
+      </div>
+
+      <div className="mt-6">
+        <Field
+          label="Notes (optional)"
+          as="textarea"
+          {...register("notes")}
+          error={errors.notes?.message}
+          placeholder="Any additional details — samples, branding requirements, delivery constraints."
+        />
+      </div>
+
+      {/* Honeypot — hidden from humans */}
+      <div className="absolute -left-[9999px]" aria-hidden="true">
+        <input tabIndex={-1} autoComplete="off" {...register("honeypot")} />
+      </div>
+
+      {serverError && (
+        <div className="mt-6 border border-ember p-4">
+          <p className="text-small text-ember">{serverError}</p>
+          <p className="mt-2 text-small text-steel">
+            You can also email us directly at{" "}
+            <a
+              href="mailto:sales@wholesalelighters.com?subject=Quote%20request"
+              className="text-ink underline underline-offset-2"
+            >
+              sales@wholesalelighters.com
+            </a>
+          </p>
+        </div>
+      )}
+
+      <div className="mt-8 flex justify-start md:justify-end">
+        <Button
+          type="submit"
+          variant="ember"
+          size="hero"
+          disabled={isSubmitting}
+          className="w-full md:w-auto"
+        >
+          {isSubmitting ? "Sending..." : "Submit quote request"}
+        </Button>
+      </div>
+    </form>
+  );
+}
