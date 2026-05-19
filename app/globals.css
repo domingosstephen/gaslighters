@@ -7,6 +7,10 @@
   --color-steel: #6B6B6B;
   --color-line: #1A1A1A;
   --color-haze: #E8E3DA;
+  --color-navy: #1B2A4A;
+  --color-flame: #E8913A;
+  --color-sand: #D6CBBB;
+  --color-clean: #FFFFFF;
 
   --font-display: var(--font-archivo);
   --font-body: var(--font-inter);

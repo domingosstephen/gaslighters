@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function QuotePage() {
   return (
-    <section className="py-16 md:py-24 lg:py-32">
+    <section className="bg-clean py-16 md:py-24 lg:py-32">
       <Container>
         <div className="max-w-3xl">
           <Eyebrow>Quote</Eyebrow>
@@ -24,7 +24,7 @@ export default function QuotePage() {
             pricing, lead times, and shipping options.
           </p>
 
-          <div className="mt-12 shadow-sm">
+          <div className="mt-12 border border-haze bg-paper p-6 md:p-10 shadow-sm">
             <Suspense>
               <QuoteForm />
             </Suspense>

@@ -15,7 +15,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-label mb-3 text-steel">Contact</p>
+            <p className="text-label mb-3 text-ember">Contact</p>
             <ul className="space-y-2 text-small">
               <li>
                 <a href="mailto:sales@wholesalelighters.com" className="underline underline-offset-2 hover:text-ember">
@@ -32,7 +32,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-label mb-3 text-steel">Address</p>
+            <p className="text-label mb-3 text-ember">Address</p>
             {/* // TBD: real address from client */}
             <p className="text-small text-steel">
               Company Address Line 1<br />

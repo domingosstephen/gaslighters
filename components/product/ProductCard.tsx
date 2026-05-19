@@ -7,7 +7,7 @@ import type { Product } from "@/lib/products";
 export function ProductCard({ product }: { product: Product }) {
   return (
     <div className="border-t border-line pt-5">
-      <div className="relative aspect-square bg-haze">
+      <div className="relative aspect-square bg-clean">
         <Image
           src={product.image}
           alt={product.name}

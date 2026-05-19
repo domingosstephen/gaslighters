@@ -9,7 +9,7 @@ export function CategoryTile({ category }: { category: Category }) {
       href={`/products?category=${category.slug}`}
       className="group block border-t border-line pt-5"
     >
-      <div className="relative aspect-[4/3] bg-haze">
+      <div className="relative aspect-[4/3] bg-clean">
         <Image
           src={category.image}
           alt={category.name}

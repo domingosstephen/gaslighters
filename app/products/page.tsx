@@ -25,7 +25,7 @@ export default function ProductsPage() {
 
   return (
     <>
-      <section className="py-16 md:py-24 lg:py-32">
+      <section className="bg-haze py-16 md:py-24 lg:py-32">
         <Container>
           <Eyebrow>Catalog</Eyebrow>
           <h1 className="text-display mt-4 text-[length:var(--text-display)]">

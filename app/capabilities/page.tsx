@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function CapabilitiesPage() {
   return (
     <>
-      <section className="py-16 md:py-24 lg:py-32">
+      <section className="bg-clean py-16 md:py-24 lg:py-32">
         <Container>
           <Eyebrow>Capabilities</Eyebrow>
           <h1 className="text-display mt-4 text-[length:var(--text-display)]">
@@ -27,7 +27,7 @@ export default function CapabilitiesPage() {
       </section>
 
       {/* Manufacturing */}
-      <section className="border-t border-line py-16 md:py-24">
+      <section className="border-t border-line bg-paper py-16 md:py-24">
         <Container>
           <Eyebrow>Manufacturing</Eyebrow>
           <h2 className="text-h2 mt-4 text-[length:var(--text-h2)]">Production</h2>
@@ -47,7 +47,7 @@ export default function CapabilitiesPage() {
       </section>
 
       {/* Compliance & certifications */}
-      <section className="border-t border-line py-16 md:py-24">
+      <section className="border-t border-line bg-clean py-16 md:py-24">
         <Container>
           <Eyebrow>Compliance</Eyebrow>
           <h2 className="text-h2 mt-4 text-[length:var(--text-h2)]">
@@ -68,7 +68,7 @@ export default function CapabilitiesPage() {
       </section>
 
       {/* Logistics */}
-      <section className="border-t border-line py-16 md:py-24">
+      <section className="border-t border-line bg-paper py-16 md:py-24">
         <Container>
           <Eyebrow>Logistics</Eyebrow>
           <h2 className="text-h2 mt-4 text-[length:var(--text-h2)]">Shipping</h2>
@@ -88,7 +88,7 @@ export default function CapabilitiesPage() {
       </section>
 
       {/* MOQ & Packaging */}
-      <section className="border-t border-line py-16 md:py-24">
+      <section className="border-t border-line bg-clean py-16 md:py-24">
         <Container>
           <Eyebrow>Packaging</Eyebrow>
           <h2 className="text-h2 mt-4 text-[length:var(--text-h2)]">
