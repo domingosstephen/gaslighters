@@ -53,25 +53,12 @@ export default function ProductsPage() {
             ))}
           </div>
 
-          {/* Asymmetric grid: row pattern 4/4/4 then 5/4/3 */}
-          <div className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-12">
-            {filtered.map((product, i) => {
-              const row = Math.floor(i / 3);
-              const col = i % 3;
-              const spanClass =
-                row % 2 === 1
-                  ? col === 0
-                    ? "lg:col-span-5"
-                    : col === 1
-                      ? "lg:col-span-4"
-                      : "lg:col-span-3"
-                  : "lg:col-span-4";
-              return (
-                <div key={product.sku} className={spanClass}>
-                  <ProductCard product={product} />
-                </div>
-              );
-            })}
+          <div className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.map((product) => (
+              <div key={product.sku}>
+                <ProductCard product={product} />
+              </div>
+            ))}
           </div>
         </Container>
       </section>
