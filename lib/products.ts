@@ -1,5 +1,6 @@
 export type Product = {
   sku: string;
+  slug: string;
   name: string;
   category: "bbq" | "refillable" | "disposable" | "torch" | "promotional";
   image: string;
@@ -10,6 +11,7 @@ export type Product = {
 export const products: Product[] = [
   {
     sku: "LK-BBQ-04",
+    slug: "bbq-utility-lighter-28cm",
     name: "BBQ Utility Lighter 28cm",
     category: "bbq",
     image: "/products/lk-bbq-04.webp",
@@ -23,6 +25,7 @@ export const products: Product[] = [
   },
   {
     sku: "LK-BBQ-07",
+    slug: "bbq-flex-neck-lighter",
     name: "BBQ Flex-Neck Lighter",
     category: "bbq",
     image: "/products/lk-bbq-07.webp",
@@ -36,6 +39,7 @@ export const products: Product[] = [
   },
   {
     sku: "LK-REF-01",
+    slug: "classic-refillable-pocket-lighter",
     name: "Classic Refillable Pocket Lighter",
     category: "refillable",
     image: "/products/lk-ref-01.jpg",
@@ -49,6 +53,7 @@ export const products: Product[] = [
   },
   {
     sku: "LK-REF-03",
+    slug: "slim-refillable-lighter",
     name: "Slim Refillable Lighter",
     category: "refillable",
     image: "/products/lk-ref-03.jpg",
@@ -62,6 +67,7 @@ export const products: Product[] = [
   },
   {
     sku: "LK-DSP-02",
+    slug: "economy-disposable-lighter",
     name: "Economy Disposable Lighter",
     category: "disposable",
     image: "/products/lk-dsp-02.jpg",
@@ -75,6 +81,7 @@ export const products: Product[] = [
   },
   {
     sku: "LK-TRC-01",
+    slug: "single-jet-torch-lighter",
     name: "Single Jet Torch Lighter",
     category: "torch",
     image: "/products/lk-trc-01.webp",
@@ -88,6 +95,7 @@ export const products: Product[] = [
   },
   {
     sku: "LK-TRC-05",
+    slug: "triple-jet-torch",
     name: "Triple Jet Torch",
     category: "torch",
     image: "/products/lk-trc-05.webp",
@@ -101,6 +109,7 @@ export const products: Product[] = [
   },
   {
     sku: "LK-PRM-01",
+    slug: "custom-print-disposable-lighter",
     name: "Custom Print Disposable Lighter",
     category: "promotional",
     image: "/products/lk-prm-01.jpg",
@@ -113,3 +122,7 @@ export const products: Product[] = [
     description: "Custom-branded disposable lighter with full-wrap pad printing. MOQ 5,000 units.",
   },
 ];
+
+export function getProductBySlug(slug: string): Product | undefined {
+  return products.find((p) => p.slug === slug);
+}

@@ -26,12 +26,18 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.wholesalegaslighters.com"),
   title: {
-    default: "Wholesale Lighters — Gas Lighters by the Pallet",
-    template: "%s | Wholesale Lighters",
+    default: "Wholesale Gas Lighters — Gas Lighters by the Pallet",
+    template: "%s | Wholesale Gas Lighters",
   },
   description:
     "B2B wholesale gas lighters for distributors, retailers, and promotional buyers. Request a quote — no minimums published, fast turnaround.",
+  openGraph: {
+    siteName: "Wholesale Gas Lighters",
+    type: "website",
+    url: "https://www.wholesalegaslighters.com",
+  },
 };
 
 export default function RootLayout({

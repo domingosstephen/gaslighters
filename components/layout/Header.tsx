@@ -30,7 +30,7 @@ export function Header() {
     >
       <Container className="flex h-16 items-center justify-between">
         <Link href="/" className="text-display text-lg tracking-tight text-paper" onClick={() => setMenuOpen(false)}>
-          Wholesale Lighters
+          Wholesale Gas Lighters
         </Link>
 
         {/* Desktop nav */}

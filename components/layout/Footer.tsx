@@ -6,7 +6,7 @@ export function Footer() {
       <Container className="py-12 md:py-16">
         <div className="grid gap-8 md:grid-cols-3">
           <div>
-            <p className="text-display text-base tracking-tight">Wholesale Lighters</p>
+            <p className="text-display text-base tracking-tight">Wholesale Gas Lighters</p>
             <p className="mt-3 text-small text-steel">
               Wholesale only — not for retail consumers.
               <br />
@@ -18,8 +18,8 @@ export function Footer() {
             <p className="text-label mb-3 text-ember">Contact</p>
             <ul className="space-y-2 text-small">
               <li>
-                <a href="mailto:sales@wholesalelighters.com" className="underline underline-offset-2 hover:text-ember">
-                  sales@wholesalelighters.com
+                <a href="mailto:sales@wholesalegaslighters.com" className="underline underline-offset-2 hover:text-ember">
+                  sales@wholesalegaslighters.com
                 </a>
               </li>
               <li>
@@ -42,7 +42,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 border-t border-steel/20 pt-6 text-small text-steel">
-          &copy; {new Date().getFullYear()} Wholesale Lighters. All rights reserved.
+          &copy; {new Date().getFullYear()} Wholesale Gas Lighters. All rights reserved.
         </div>
       </Container>
     </footer>
