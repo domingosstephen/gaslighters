@@ -145,12 +145,12 @@ export function QuoteForm() {
         <div className="mt-6 border border-ember p-4">
           <p className="text-small text-ember">{serverError}</p>
           <p className="mt-2 text-small text-steel">
-            You can also email us directly at{" "}
+            You can also{" "}
             <a
-              href="mailto:sales@wholesalelighters.com?subject=Quote%20request"
+              href="mailto:benserena416@gmail.com?subject=Quote%20Request"
               className="text-ink underline underline-offset-2"
             >
-              sales@wholesalelighters.com
+              send us an inquiry directly
             </a>
           </p>
         </div>

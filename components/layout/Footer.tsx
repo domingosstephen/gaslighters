@@ -18,14 +18,13 @@ export function Footer() {
             <p className="text-label mb-3 text-ember">Contact</p>
             <ul className="space-y-2 text-small">
               <li>
-                <a href="mailto:sales@wholesalegaslighters.com" className="underline underline-offset-2 hover:text-ember">
-                  sales@wholesalegaslighters.com
+                <a href="mailto:benserena416@gmail.com?subject=Wholesale%20Inquiry" className="underline underline-offset-2 hover:text-ember">
+                  Send us an inquiry
                 </a>
               </li>
               <li>
-                <a href="https://wa.me/0000000000" className="text-spec underline underline-offset-2 hover:text-ember">
-                  {/* // TBD: real WhatsApp number */}
-                  +00 000 000 0000
+                <a href="tel:+33758885187" className="text-spec underline underline-offset-2 hover:text-ember">
+                  +33 7 58 88 51 87
                 </a>
               </li>
             </ul>
