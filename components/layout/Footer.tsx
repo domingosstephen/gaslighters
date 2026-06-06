@@ -38,6 +38,7 @@ export function Footer() {
               <li><Link href="/capabilities" className="underline underline-offset-2 hover:text-ember">Capabilities</Link></li>
               <li><Link href="/about" className="underline underline-offset-2 hover:text-ember">About</Link></li>
               <li><Link href="/quote" className="underline underline-offset-2 hover:text-ember">Request a Quote</Link></li>
+              <li><Link href="/blog" className="underline underline-offset-2 hover:text-ember">Blog</Link></li>
             </ul>
           </div>
 
