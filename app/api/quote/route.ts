@@ -19,7 +19,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: true });
     }
 
-    await sendQuoteEmail(result.data);
+    // Try SMTP email (optional — Web3Forms handles delivery client-side)
+    try {
+      await sendQuoteEmail(result.data);
+    } catch (emailErr) {
+      console.error("SMTP email failed (non-critical, Web3Forms handles delivery):", emailErr);
+    }
 
     return NextResponse.json({ ok: true });
   } catch {
