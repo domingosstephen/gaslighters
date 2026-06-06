@@ -23,7 +23,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${product.name} — Wholesale Gas Lighters`,
-    description: product.description,
+    description: `${product.description} SKU: ${product.sku}. Request bulk pricing for wholesale orders.`,
+    alternates: { canonical: `/products/${product.slug}` },
     openGraph: {
       title: product.name,
       description: product.description,
@@ -46,13 +47,20 @@ export default async function ProductDetailPage({ params }: Props) {
       {
         "@type": "ListItem",
         position: 1,
+        name: "Home",
+        item: "https://www.wholesalegaslighters.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
         name: "Products",
         item: "https://www.wholesalegaslighters.com/products",
       },
       {
         "@type": "ListItem",
-        position: 2,
+        position: 3,
         name: product.name,
+        item: `https://www.wholesalegaslighters.com/products/${product.slug}`,
       },
     ],
   };
@@ -65,6 +73,13 @@ export default async function ProductDetailPage({ params }: Props) {
     sku: product.sku,
     image: `https://www.wholesalegaslighters.com${product.image}`,
     brand: { "@type": "Brand", name: "Wholesale Gas Lighters" },
+    category: product.category.charAt(0).toUpperCase() + product.category.slice(1) + " Lighters",
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      priceCurrency: "USD",
+      seller: { "@type": "Organization", name: "Wholesale Gas Lighters" },
+    },
   };
 
   return (

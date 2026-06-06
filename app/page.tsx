@@ -6,9 +6,44 @@ import { SectionDivider } from "@/components/ui/SectionDivider";
 import { ProductCard } from "@/components/product/ProductCard";
 import { products } from "@/lib/products";
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Wholesale Gas Lighters",
+  url: "https://www.wholesalegaslighters.com",
+  description: "B2B wholesale gas lighter supplier for distributors, retailers, and promotional buyers. Shipping to 30+ countries.",
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+33758885187",
+    contactType: "sales",
+    availableLanguage: ["English", "French"],
+  },
+};
+
+const faqItems = [
+  { q: "What is the minimum order quantity?", a: "Our standard MOQ is 1,000 units. For custom-printed promotional lighters, the MOQ is 5,000 units. Contact us for specific product minimums." },
+  { q: "Do you ship internationally?", a: "Yes. We ship to 30+ countries across Europe, North America, Latin America, Middle East, Africa, Southeast Asia, and Oceania. We offer FOB, CIF, and DDP shipping terms." },
+  { q: "What types of gas lighters do you sell?", a: "We supply BBQ utility lighters, refillable pocket lighters, economy disposable lighters, jet torch lighters, and custom-branded promotional lighters." },
+  { q: "Can I get custom-branded lighters?", a: "Yes. Our promotional lighters support full-wrap pad printing with your logo and branding. MOQ for custom print orders is 5,000 units." },
+  { q: "How quickly can I get a quote?", a: "Most quote requests are returned within one business day (48 hours). Submit your request through our quote form and we will respond with pricing, lead times, and shipping options." },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
 export default function Home() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
       {/* Hero — full background image with overlay */}
       <section className="relative">
         {/* Background image */}
@@ -166,6 +201,24 @@ export default function Home() {
       <Container>
         <SectionDivider number="04" total="04" label="REQUEST" />
       </Container>
+
+      {/* FAQ */}
+      <section className="bg-clean py-16 md:py-24">
+        <Container>
+          <Eyebrow>FAQ</Eyebrow>
+          <h2 className="text-h2 mt-4 text-[length:var(--text-h2)]">
+            Frequently asked questions
+          </h2>
+          <div className="mt-10 max-w-2xl space-y-8">
+            {faqItems.map((f) => (
+              <div key={f.q} className="border-t border-ink/10 pt-6">
+                <h3 className="text-h3 text-[length:var(--text-h3)]">{f.q}</h3>
+                <p className="mt-2 text-steel">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
 
       {/* Closing CTA */}
       <section className="bg-ink py-16 md:py-24">

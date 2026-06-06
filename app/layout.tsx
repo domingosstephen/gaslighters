@@ -29,7 +29,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.wholesalegaslighters.com"),
   title: {
-    default: "Wholesale Gas Lighters — Gas Lighters by the Pallet",
+    default: "Wholesale Gas Lighters — Bulk Gas Lighters by the Pallet",
     template: "%s | Wholesale Gas Lighters",
   },
   description:
@@ -39,6 +39,8 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://www.wholesalegaslighters.com",
   },
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({

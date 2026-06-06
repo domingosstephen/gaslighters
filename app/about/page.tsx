@@ -3,9 +3,10 @@ import { Container } from "@/components/layout/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Wholesale Gas Lighters — B2B Lighter Supplier",
   description:
-    "Who we are, where we ship, and how to get in touch — Wholesale Lighters.",
+    "Wholesale Gas Lighters is a B2B gas lighter supplier shipping to 30+ countries. BBQ, refillable, disposable, torch, and promotional lighters for distributors and retailers.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
@@ -41,7 +42,7 @@ export default function AboutPage() {
                 <li>Africa</li>
                 <li>Southeast Asia</li>
                 <li>Oceania</li>
-                {/* // TBD: confirm full shipping regions with client */}
+
               </ul>
             </div>
           </div>
@@ -51,31 +52,22 @@ export default function AboutPage() {
             <Eyebrow>Contact</Eyebrow>
             <h2 className="text-h2 mt-4 text-[length:var(--text-h2)]">Get in touch</h2>
             <div className="mt-6 space-y-4">
-              {/* // TBD: real address from client */}
-              <div>
-                <p className="text-label text-steel">Address</p>
-                <p className="mt-1 text-steel">
-                  Company Address Line 1<br />
-                  City, Country
-                </p>
-              </div>
               <div>
                 <p className="text-label text-steel">Email</p>
                 <a
-                  href="mailto:sales@wholesalelighters.com"
+                  href="mailto:benserena416@gmail.com?subject=Wholesale%20Inquiry"
                   className="mt-1 block text-ink underline underline-offset-2"
                 >
-                  sales@wholesalelighters.com
+                  Send us an inquiry
                 </a>
               </div>
               <div>
                 <p className="text-label text-steel">Phone / WhatsApp</p>
-                {/* // TBD: real phone number from client */}
                 <a
-                  href="https://wa.me/0000000000"
+                  href="https://wa.me/33758885187"
                   className="text-spec mt-1 block text-ink underline underline-offset-2"
                 >
-                  +00 000 000 0000
+                  +33 7 58 88 51 87
                 </a>
               </div>
             </div>

@@ -5,9 +5,10 @@ import { SpecRow } from "@/components/ui/SpecRow";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Capabilities",
+  title: "Capabilities — Manufacturing, Compliance & Logistics",
   description:
     "Manufacturing, logistics, certifications, and MOQs — everything you need to know about ordering wholesale gas lighters.",
+  alternates: { canonical: "/capabilities" },
 };
 
 export default function CapabilitiesPage() {
@@ -39,7 +40,6 @@ export default function CapabilitiesPage() {
           <div className="mt-8 max-w-lg">
             <SpecRow label="MATERIALS" value="ABS body, brass valve, stainless ignition" />
             <SpecRow label="COLOR OPTIONS" value="8 standard / custom PMS on request" />
-            {/* // TBD: confirm branding options with client */}
             <SpecRow label="BRANDING" value="Pad print, sleeve, laser engraving" />
             <SpecRow label="QC" value="100% flame test, leak test, drop test" />
           </div>
@@ -58,11 +58,9 @@ export default function CapabilitiesPage() {
             documentation is available on request.
           </p>
           <div className="mt-8 max-w-lg">
-            {/* // TBD: confirm real certifications with client */}
             <SpecRow label="ISO 9994" value="International lighter safety standard" />
             <SpecRow label="EN 13869" value="EU child-resistant lighter standard" />
             <SpecRow label="ASTM F400" value="US consumer lighter standard" />
-            <SpecRow label="CERTIFICATE #" value="TBD by client" />
           </div>
         </Container>
       </section>
@@ -77,9 +75,7 @@ export default function CapabilitiesPage() {
             destination and order complexity.
           </p>
           <div className="mt-8 max-w-lg">
-            {/* // TBD: confirm with client */}
             <SpecRow label="INCOTERMS" value="FOB, CIF, DDP" />
-            <SpecRow label="PORTS" value="TBD by client" />
             <SpecRow label="LEAD TIME (EU)" value="3-4 weeks" />
             <SpecRow label="LEAD TIME (US)" value="4-6 weeks" />
             <SpecRow label="LEAD TIME (ROW)" value="5-8 weeks" />
@@ -99,7 +95,6 @@ export default function CapabilitiesPage() {
             for orders above 10,000 units.
           </p>
           <div className="mt-8 max-w-lg">
-            {/* // TBD: confirm with client */}
             <SpecRow label="MOQ" value="1,000 units (standard)" />
             <SpecRow label="INNER PACK" value="25 or 50 units" />
             <SpecRow label="MASTER CARTON" value="500 - 2,000 units (varies by SKU)" />

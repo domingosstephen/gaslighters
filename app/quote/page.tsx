@@ -5,9 +5,10 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { QuoteForm } from "@/components/forms/QuoteForm";
 
 export const metadata: Metadata = {
-  title: "Request a Quote",
+  title: "Request a Quote — Wholesale Gas Lighters",
   description:
     "Request a wholesale quote for gas lighters — BBQ, refillable, disposable, torch, and promotional lighters. We respond within one business day.",
+  alternates: { canonical: "/quote" },
 };
 
 export default function QuotePage() {
