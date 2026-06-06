@@ -34,6 +34,21 @@ export function HeroQuoteForm() {
         throw new Error(json?.error || "Something went wrong.");
       }
 
+      // Send email notification via Web3Forms (client-side)
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "b1511371-e777-4260-9502-7d3533931fea",
+          subject: `[QUOTE] ${data.companyName} — ${data.productsOfInterest}`,
+          from_name: `${data.contactName} (${data.companyName})`,
+          email: data.email,
+          country: data.country,
+          products: data.productsOfInterest,
+          quantity: data.estimatedQuantity,
+        }),
+      }).catch(() => {});
+
       setSubmitted(true);
     } catch (err) {
       setServerError(

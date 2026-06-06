@@ -41,7 +41,7 @@ export default function PrivacyPage() {
 
             <div>
               <h2 className="text-h3 text-[length:var(--text-h3)] text-ink">5. Your Rights</h2>
-              <p className="mt-3">You have the right to access, correct, or delete your personal information. Contact us at <a href="mailto:benserena416@gmail.com" className="text-ink underline underline-offset-2">benserena416@gmail.com</a> to exercise these rights.</p>
+              <p className="mt-3">You have the right to access, correct, or delete your personal information. Contact us at <a href="mailto:infomegatitulocomerciotrade@gmail.com" className="text-ink underline underline-offset-2">infomegatitulocomerciotrade@gmail.com</a> to exercise these rights.</p>
             </div>
           </div>
         </div>

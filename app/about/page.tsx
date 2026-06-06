@@ -55,7 +55,7 @@ export default function AboutPage() {
               <div>
                 <p className="text-label text-steel">Email</p>
                 <a
-                  href="mailto:benserena416@gmail.com?subject=Wholesale%20Inquiry"
+                  href="mailto:infomegatitulocomerciotrade@gmail.com?subject=Wholesale%20Inquiry"
                   className="mt-1 block text-ink underline underline-offset-2"
                 >
                   Send us an inquiry

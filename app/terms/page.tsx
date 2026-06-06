@@ -55,7 +55,7 @@ export default function TermsPage() {
 
             <div>
               <h2 className="text-h3 text-[length:var(--text-h3)] text-ink">8. Contact</h2>
-              <p className="mt-3">For questions about these terms, contact us at <a href="mailto:benserena416@gmail.com" className="text-ink underline underline-offset-2">benserena416@gmail.com</a>.</p>
+              <p className="mt-3">For questions about these terms, contact us at <a href="mailto:infomegatitulocomerciotrade@gmail.com" className="text-ink underline underline-offset-2">infomegatitulocomerciotrade@gmail.com</a>.</p>
             </div>
           </div>
         </div>

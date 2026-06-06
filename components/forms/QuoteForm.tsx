@@ -39,6 +39,24 @@ export function QuoteForm() {
         throw new Error(json?.error || "Something went wrong.");
       }
 
+      // Send email notification via Web3Forms (client-side)
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "b1511371-e777-4260-9502-7d3533931fea",
+          subject: `[QUOTE] ${data.companyName} — ${data.productsOfInterest}`,
+          from_name: `${data.contactName} (${data.companyName})`,
+          email: data.email,
+          phone: data.phone || "N/A",
+          country: data.country,
+          products: data.productsOfInterest,
+          quantity: data.estimatedQuantity,
+          lead_time: data.targetLeadTime || "N/A",
+          notes: data.notes || "N/A",
+        }),
+      }).catch(() => {});
+
       setSubmittedEmail(data.email);
       setSubmitted(true);
     } catch (err) {
@@ -147,7 +165,7 @@ export function QuoteForm() {
           <p className="mt-2 text-small text-steel">
             You can also{" "}
             <a
-              href="mailto:benserena416@gmail.com?subject=Quote%20Request"
+              href="mailto:infomegatitulocomerciotrade@gmail.com?subject=Quote%20Request"
               className="text-ink underline underline-offset-2"
             >
               send us an inquiry directly

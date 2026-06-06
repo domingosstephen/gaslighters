@@ -19,7 +19,7 @@ export function Footer() {
             <p className="text-label mb-3 text-ember">Contact</p>
             <ul className="space-y-2 text-small">
               <li>
-                <a href="mailto:benserena416@gmail.com?subject=Wholesale%20Inquiry" className="underline underline-offset-2 hover:text-ember">
+                <a href="mailto:infomegatitulocomerciotrade@gmail.com?subject=Wholesale%20Inquiry" className="underline underline-offset-2 hover:text-ember">
                   Send us an inquiry
                 </a>
               </li>
