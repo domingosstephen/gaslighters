@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import Script from "next/script";
 import { getAllPosts } from "@/lib/blog";
 import { blogListSchema } from "@/lib/blog-schema";
 import { BLOG_CATEGORIES } from "@/types/blog";
@@ -102,6 +103,17 @@ export default function BlogPage() {
               ))}
             </div>
           )}
+        </Container>
+      </section>
+
+      {/* Soro Blog Embed */}
+      <section className="bg-paper py-16">
+        <Container>
+          <div id="soro-blog"></div>
+          <Script
+            src="https://app.trysoro.com/api/embed/0894ba58-9ce8-4f01-a5bc-ce94391793bd"
+            strategy="lazyOnload"
+          />
         </Container>
       </section>
     </>
