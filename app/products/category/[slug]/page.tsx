@@ -94,6 +94,9 @@ export default async function CategoryPage({ params }: Props) {
           <p className="mt-4 max-w-2xl text-lg text-steel">
             {category.description}
           </p>
+          <p className="mt-4 max-w-2xl text-steel">
+            {category.longDescription}
+          </p>
         </Container>
       </section>
 

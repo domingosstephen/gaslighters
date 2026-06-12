@@ -6,7 +6,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 const SITE_URL = "https://www.wholesalegaslighters.com";
 
 export const metadata: Metadata = {
-  title: "Blog — Wholesale Gas Lighters",
+  title: "Wholesale Lighter Blog — Buying Guides & Industry Insights",
   description:
     "Wholesale lighter industry insights, buying guides, safety standards, and product knowledge for B2B buyers and importers.",
   alternates: { canonical: `${SITE_URL}/blog` },
@@ -24,7 +24,11 @@ export default function BlogPage() {
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-steel">
             Buying guides, market insights, safety standards, and everything B2B
-            lighter buyers need to know.
+            lighter buyers need to know. Whether you are sourcing BBQ lighters
+            for retail chains, disposable lighters for convenience stores, or
+            custom-branded lighters for promotional campaigns, our articles cover
+            the specifications, compliance requirements, and logistics that
+            matter to wholesale buyers.
           </p>
         </Container>
       </section>
@@ -35,7 +39,7 @@ export default function BlogPage() {
           <div id="soro-blog"></div>
           <Script
             src="https://app.trysoro.com/api/embed/0894ba58-9ce8-4f01-a5bc-ce94391793bd"
-            strategy="lazyOnload"
+            strategy="afterInteractive"
           />
         </Container>
       </section>
