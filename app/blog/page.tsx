@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Script from "next/script";
+import { getAllPosts } from "@/lib/blog";
+import { BLOG_CATEGORIES } from "@/types/blog";
 import { Container } from "@/components/layout/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 
@@ -13,6 +16,8 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
+  const posts = getAllPosts();
+
   return (
     <>
       {/* Hero */}
@@ -32,6 +37,51 @@ export default function BlogPage() {
           </p>
         </Container>
       </section>
+
+      {/* Native blog posts */}
+      {posts.length > 0 && (
+        <section className="bg-paper py-16">
+          <Container>
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {posts.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group overflow-hidden rounded-2xl border border-sand bg-clean transition-shadow hover:shadow-lg"
+                >
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="text-eyebrow text-ember">
+                        {BLOG_CATEGORIES[post.category]?.label ?? post.category}
+                      </span>
+                      <span className="text-small text-steel">
+                        {post.readingTime} min read
+                      </span>
+                    </div>
+                    <h2 className="text-h3 text-ink group-hover:text-ember transition-colors">
+                      {post.title}
+                    </h2>
+                    <p className="mt-2 text-small text-steel line-clamp-3">
+                      {post.excerpt}
+                    </p>
+                    <div className="mt-4 flex items-center gap-2 text-small text-steel">
+                      <span>{post.author.name}</span>
+                      <span>&middot;</span>
+                      <time dateTime={post.publishedAt}>
+                        {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </time>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
 
       {/* Soro Blog Embed */}
       <section className="bg-paper py-16">

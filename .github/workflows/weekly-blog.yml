@@ -1,16 +1,33 @@
-name: Weekly Blog Post
+name: Daily Blog Generation
 
 on:
   schedule:
-    - cron: "0 6 * * 1"   # Every Monday at 6 AM UTC
-  workflow_dispatch:        # Allow manual trigger
+    - cron: "0 6 * * *"   # Every day at 6 AM UTC
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "Number of articles (1-5)"
+        required: false
+        default: "3"
+        type: choice
+        options: ["1", "2", "3", "4", "5"]
+      action:
+        description: "Action"
+        required: false
+        default: "generate"
+        type: choice
+        options:
+          - generate
+          - stats
+          - dry-run
 
 permissions:
   contents: write
 
 jobs:
-  generate-blog-post:
+  blog-engine:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repository
@@ -25,18 +42,44 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install blog engine dependencies
+      - name: Install tsx
         run: npm install -g tsx
 
-      - name: Generate blog post
+      - name: Show stats
+        if: ${{ github.event.inputs.action == 'stats' || github.event_name == 'schedule' }}
+        run: npx tsx scripts/blog-engine/run.ts --stats
+
+      - name: Generate articles
+        if: ${{ github.event.inputs.action == 'generate' || github.event.inputs.action == '' || github.event_name == 'schedule' }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: npx tsx scripts/blog-engine/run.ts
-
-      - name: Commit and push new article
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add content/blog/ scripts/blog-engine/control.json scripts/blog-engine/published.json
-          git diff --staged --quiet || git commit -m "blog: auto-generate weekly article"
+          COUNT="${{ github.event.inputs.count || '3' }}"
+          npx tsx scripts/blog-engine/run.ts --count "$COUNT"
+
+      - name: Dry run
+        if: ${{ github.event.inputs.action == 'dry-run' }}
+        run: npx tsx scripts/blog-engine/run.ts --dry-run
+
+      - name: Show final stats
+        if: always()
+        run: npx tsx scripts/blog-engine/run.ts --stats
+
+      - name: Commit and push
+        if: ${{ github.event.inputs.action != 'stats' && github.event.inputs.action != 'dry-run' }}
+        run: |
+          git config user.name "Blog Engine Bot"
+          git config user.email "blog-engine@wholesalegaslighters.com"
+
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git add content/blog/*.json 2>/dev/null || true
+          git add scripts/blog-engine/published.json 2>/dev/null || true
+          git add scripts/blog-engine/control.json 2>/dev/null || true
+
+          POST_COUNT=$(git diff --cached --name-only | grep "content/blog/" | wc -l || echo "0")
+          git commit -m "blog: add ${POST_COUNT} new article(s) [automated]"
           git push
