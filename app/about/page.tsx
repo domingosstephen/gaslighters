@@ -20,12 +20,19 @@ export default function AboutPage() {
             Who we are
           </h1>
           <p className="mt-6 text-[length:var(--text-body)] text-steel md:text-[1.0625rem]">
-            Wholesale Lighters is a B2B supplier of gas lighters for distributors, retailers,
+            Wholesale Gas Lighters is a B2B supplier of gas lighters for distributors, retailers,
             convenience chains, hospitality buyers, and promotional merchandise companies. We
             keep it simple: a focused product range, competitive pricing on volume, and
             reliable logistics from factory to warehouse. No retail sales, no middlemen, no
             fluff.
           </p>
+          <p className="mt-4 text-[length:var(--text-body)] text-steel md:text-[1.0625rem]">
+            All products in our catalog comply with EN ISO 9994 (European lighter safety)
+            and ASTM F400 (US consumer lighter safety) standards. Every lighter ships with
+            the required safety documentation for international trade, including MSDS sheets
+            for butane and isobutane fills.
+          </p>
+          <p className="mt-2 text-spec text-small text-steel">Last updated: June 2026</p>
 
           {/* Where we ship */}
           <div className="mt-16 border-t border-line pt-10">

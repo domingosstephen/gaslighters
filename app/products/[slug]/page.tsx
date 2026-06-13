@@ -82,6 +82,16 @@ export default async function ProductDetailPage({ params }: Props) {
     },
   };
 
+  const faqJsonLd = product.faq.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: product.faq.map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
+  } : null;
+
   return (
     <section className="pt-24 pb-16 md:pt-28 md:pb-24">
       <script
@@ -92,6 +102,12 @@ export default async function ProductDetailPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <Container>
         {/* Breadcrumbs */}
         <nav className="mb-6 flex items-center gap-2 text-[0.75rem] font-medium uppercase tracking-wider text-steel">
@@ -150,6 +166,23 @@ export default async function ProductDetailPage({ params }: Props) {
             </div>
           </div>
         </div>
+
+        {/* FAQ section */}
+        {product.faq.length > 0 && (
+          <div className="mt-16 border-t border-line pt-12">
+            <h2 className="text-h2 text-[length:var(--text-h2)]">
+              Frequently Asked Questions
+            </h2>
+            <div className="mt-8 space-y-6">
+              {product.faq.map((f) => (
+                <div key={f.question} className="border-t border-ink/10 pt-6">
+                  <h3 className="text-h3 text-[length:var(--text-h3)]">{f.question}</h3>
+                  <p className="mt-2 text-steel">{f.answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Full specs section */}
         <div className="mt-16 border-t border-line pt-12">
