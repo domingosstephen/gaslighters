@@ -1,8 +1,5 @@
-import Anthropic from "@anthropic-ai/sdk";
 import { GENERATION_CONFIG } from "./config";
 import type { BlogAuthor, BlogCategory } from "../../types/blog";
-
-const anthropic = new Anthropic();
 
 interface GeneratedArticle {
   title: string;
@@ -15,6 +12,34 @@ interface GeneratedArticle {
   readingTime: number;
   faqItems: { question: string; answer: string }[];
   tldr: string;
+}
+
+async function callAnthropic(systemPrompt: string, userPrompt: string): Promise<string> {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) throw new Error("ANTHROPIC_API_KEY environment variable is not set.");
+
+  const res = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": apiKey,
+      "anthropic-version": "2023-06-01",
+    },
+    body: JSON.stringify({
+      model: GENERATION_CONFIG.model,
+      max_tokens: GENERATION_CONFIG.maxTokens,
+      system: systemPrompt,
+      messages: [{ role: "user", content: userPrompt }],
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Anthropic API error ${res.status}: ${err}`);
+  }
+
+  const data = await res.json();
+  return data.content[0].text;
 }
 
 export async function generateArticle(
@@ -40,13 +65,9 @@ Content format: Return valid HTML content (no markdown). Use <h2>, <h3>, <p>, <u
 
 IMPORTANT: Do not fabricate statistics or claim unverified market data. Use qualitative insights and general industry knowledge. When referencing standards, be accurate about standard numbers (ISO 9994, EN 13869, ASTM F400).`;
 
-  const response = await anthropic.messages.create({
-    model: GENERATION_CONFIG.model,
-    max_tokens: GENERATION_CONFIG.maxTokens,
-    messages: [
-      {
-        role: "user",
-        content: `Write a comprehensive blog article about: "${topic}"
+  const raw = await callAnthropic(
+    systemPrompt,
+    `Write a comprehensive blog article about: "${topic}"
 Category: ${category}
 Author: ${author.name} (${author.title})
 
@@ -71,17 +92,10 @@ Return a JSON object with these exact fields:
   "tldr": "One-paragraph summary of the key takeaway (2-3 sentences)."
 }
 
-Return ONLY the JSON object, no markdown fences or extra text.`,
-      },
-    ],
-    system: systemPrompt,
-  });
+Return ONLY the JSON object, no markdown fences or extra text.`
+  );
 
-  const textBlock = response.content.find((b) => b.type === "text");
-  if (!textBlock) throw new Error("No text in response");
-
-  let jsonStr = textBlock.text.trim();
-  // Strip markdown code fences if present
+  let jsonStr = raw.trim();
   if (jsonStr.startsWith("\x60\x60\x60")) {
     jsonStr = jsonStr.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
   }
