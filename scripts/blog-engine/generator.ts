@@ -65,9 +65,7 @@ Content format: Return valid HTML content (no markdown). Use <h2>, <h3>, <p>, <u
 
 IMPORTANT: Do not fabricate statistics or claim unverified market data. Use qualitative insights and general industry knowledge. When referencing standards, be accurate about standard numbers (ISO 9994, EN 13869, ASTM F400).`;
 
-  const raw = await callAnthropic(
-    systemPrompt,
-    `Write a comprehensive blog article about: "${topic}"
+  const userPrompt = `Write a comprehensive blog article about: "${topic}"
 Category: ${category}
 Author: ${author.name} (${author.title})
 
@@ -92,13 +90,23 @@ Return a JSON object with these exact fields:
   "tldr": "One-paragraph summary of the key takeaway (2-3 sentences)."
 }
 
-Return ONLY the JSON object, no markdown fences or extra text.`
-  );
+Return ONLY the JSON object, no markdown fences or extra text.`;
 
-  let jsonStr = raw.trim();
-  if (jsonStr.startsWith("\x60\x60\x60")) {
-    jsonStr = jsonStr.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    const raw = await callAnthropic(systemPrompt, userPrompt);
+
+    let jsonStr = raw.trim();
+    if (jsonStr.startsWith("\x60\x60\x60")) {
+      jsonStr = jsonStr.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
+    }
+
+    try {
+      return JSON.parse(jsonStr) as GeneratedArticle;
+    } catch (err) {
+      if (attempt === 2) throw new Error(`Failed to parse JSON after 2 attempts: ${(err as Error).message}`);
+      console.log(`   ⚠️  JSON parse failed on attempt ${attempt}, retrying...`);
+    }
   }
 
-  return JSON.parse(jsonStr) as GeneratedArticle;
+  throw new Error("Unreachable");
 }
