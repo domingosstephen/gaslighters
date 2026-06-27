@@ -24,12 +24,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${product.name} — Wholesale Gas Lighters`,
     description: `${product.description} SKU: ${product.sku}. Request bulk pricing for wholesale orders.`,
-    alternates: { canonical: `/products/${product.slug}` },
+    alternates: { canonical: `https://www.wholesalegaslighters.com/products/${product.slug}` },
     openGraph: {
-      title: product.name,
+      title: `${product.name} | Wholesale Gas Lighters`,
       description: product.description,
       url: `https://www.wholesalegaslighters.com/products/${product.slug}`,
-      images: [{ url: product.image }],
+      images: [{ url: `https://www.wholesalegaslighters.com${product.image}`, width: 800, height: 800, alt: product.name }],
+      type: "website",
+      siteName: "Wholesale Gas Lighters",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${product.name} | Wholesale Gas Lighters`,
+      description: product.description,
+      images: [`https://www.wholesalegaslighters.com${product.image}`],
     },
   };
 }
@@ -78,7 +86,17 @@ export default async function ProductDetailPage({ params }: Props) {
       "@type": "Offer",
       availability: "https://schema.org/InStock",
       priceCurrency: "USD",
-      seller: { "@type": "Organization", name: "Wholesale Gas Lighters" },
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        priceCurrency: "USD",
+        referenceQuantity: { "@type": "QuantitativeValue", value: 1000, unitText: "units" },
+        description: "Contact for bulk pricing. MOQ 1,000 units.",
+      },
+      seller: {
+        "@type": "Organization",
+        name: "Wholesale Gas Lighters",
+        url: "https://www.wholesalegaslighters.com",
+      },
     },
   };
 

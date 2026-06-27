@@ -6,18 +6,105 @@ import { SectionDivider } from "@/components/ui/SectionDivider";
 import { ProductCard } from "@/components/product/ProductCard";
 import { products } from "@/lib/products";
 
+const BASE = "https://www.wholesalegaslighters.com";
+
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": `${BASE}/#organization`,
   name: "Wholesale Gas Lighters",
-  url: "https://www.wholesalegaslighters.com",
-  description: "B2B wholesale gas lighter supplier for distributors, retailers, and promotional buyers. Shipping to 30+ countries.",
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: "+33758885187",
-    contactType: "sales",
-    availableLanguage: ["English", "French"],
+  url: BASE,
+  logo: {
+    "@type": "ImageObject",
+    url: `${BASE}/hero-bg.jpg`,
+    width: 1200,
+    height: 630,
   },
+  description: "B2B wholesale gas lighter supplier for distributors, retailers, and promotional buyers. Shipping to 30+ countries. BBQ, refillable, disposable, torch, and promotional lighters.",
+  foundingDate: "2020",
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: "+33758885187",
+      contactType: "sales",
+      availableLanguage: ["English", "French"],
+      contactOption: "TollFree",
+    },
+  ],
+  areaServed: [
+    { "@type": "Continent", name: "Europe" },
+    { "@type": "Continent", name: "North America" },
+    { "@type": "Continent", name: "South America" },
+    { "@type": "Continent", name: "Africa" },
+    { "@type": "Continent", name: "Asia" },
+    { "@type": "Continent", name: "Oceania" },
+  ],
+  knowsAbout: ["Gas Lighters", "Wholesale Lighters", "BBQ Lighters", "Promotional Lighters", "Disposable Lighters"],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${BASE}/#website`,
+  name: "Wholesale Gas Lighters",
+  url: BASE,
+  description: "B2B wholesale gas lighters for distributors, retailers, and promotional buyers across 30+ countries.",
+  inLanguage: "en",
+  publisher: { "@id": `${BASE}/#organization` },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${BASE}/products?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
+
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "How to Order Wholesale Gas Lighters",
+  description: "Step-by-step guide to placing a bulk gas lighter order — from product selection to delivery.",
+  totalTime: "P2D",
+  step: [
+    {
+      "@type": "HowToStep",
+      position: 1,
+      name: "Browse Our Product Catalog",
+      text: "Explore our range of BBQ lighters, refillable pocket lighters, disposable lighters, jet torch lighters, and custom promotional lighters.",
+      url: `${BASE}/products`,
+    },
+    {
+      "@type": "HowToStep",
+      position: 2,
+      name: "Submit a Quote Request",
+      text: "Use our quote form to specify the product, quantity, destination country, and any custom branding requirements. Most requests are returned within one business day.",
+      url: `${BASE}/quote`,
+    },
+    {
+      "@type": "HowToStep",
+      position: 3,
+      name: "Review Your Quote",
+      text: "We provide unit pricing, packaging details, MOQ confirmation, lead times, and shipping options (FOB, CIF, DDP).",
+    },
+    {
+      "@type": "HowToStep",
+      position: 4,
+      name: "Confirm and Ship",
+      text: "Once the order is confirmed, we produce and ship. Full tracking is provided from factory to your warehouse.",
+    },
+  ],
+};
+
+const speakableSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", "[data-speakable]"],
+  },
+  url: BASE,
 };
 
 const faqItems = [
@@ -42,6 +129,9 @@ export default function Home() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* Hero — full background image with overlay */}

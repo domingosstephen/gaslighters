@@ -6,11 +6,22 @@ export const metadata: Metadata = {
   title: "About Wholesale Gas Lighters — B2B Lighter Supplier",
   description:
     "Wholesale Gas Lighters is a B2B gas lighter supplier shipping to 30+ countries. BBQ, refillable, disposable, torch, and promotional lighters for distributors and retailers.",
-  alternates: { canonical: "/about" },
+  alternates: { canonical: "https://www.wholesalegaslighters.com/about" },
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.wholesalegaslighters.com" },
+    { "@type": "ListItem", position: 2, name: "About", item: "https://www.wholesalegaslighters.com/about" },
+  ],
 };
 
 export default function AboutPage() {
   return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
     <section className="bg-clean py-16 md:py-24 lg:py-32">
       <Container>
         <div className="max-w-2xl">
@@ -82,5 +93,6 @@ export default function AboutPage() {
         </div>
       </Container>
     </section>
+    </>
   );
 }

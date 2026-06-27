@@ -34,13 +34,60 @@ export const metadata: Metadata = {
   },
   description:
     "B2B wholesale gas lighters for distributors, retailers, and promotional buyers. Request a quote — no minimums published, fast turnaround.",
+  keywords: [
+    "wholesale gas lighters",
+    "bulk gas lighters",
+    "BBQ lighters wholesale",
+    "disposable lighters bulk",
+    "promotional lighters",
+    "jet torch lighters wholesale",
+    "refillable lighters bulk",
+    "custom branded lighters",
+    "lighter supplier",
+    "lighter distributor",
+    "gas lighter MOQ",
+    "buy lighters by pallet",
+    "wholesale lighter supplier",
+    "B2B gas lighters",
+  ],
+  authors: [{ name: "Wholesale Gas Lighters", url: "https://www.wholesalegaslighters.com" }],
+  creator: "Wholesale Gas Lighters",
+  publisher: "Wholesale Gas Lighters",
+  category: "wholesale",
   openGraph: {
     siteName: "Wholesale Gas Lighters",
     type: "website",
     url: "https://www.wholesalegaslighters.com",
+    images: [
+      {
+        url: "https://www.wholesalegaslighters.com/hero-bg.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Wholesale Gas Lighters — Bulk Supply",
+      },
+    ],
   },
-  alternates: { canonical: "/" },
-  robots: { index: true, follow: true },
+  twitter: {
+    card: "summary_large_image",
+    title: "Wholesale Gas Lighters — Bulk Gas Lighters by the Pallet",
+    description: "B2B wholesale gas lighters for distributors, retailers, and promotional buyers. Request a quote — fast turnaround.",
+    images: ["https://www.wholesalegaslighters.com/hero-bg.jpg"],
+  },
+  alternates: { canonical: "https://www.wholesalegaslighters.com" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "google4eb14543200fea69",
+  },
 };
 
 export default function RootLayout({
