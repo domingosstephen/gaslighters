@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { quoteSchema } from "@/lib/validation";
-import { sendQuoteEmail } from "@/lib/email";
 
 export async function POST(request: Request) {
   try {
@@ -19,11 +18,31 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: true });
     }
 
-    // Try SMTP email (optional — Web3Forms handles delivery client-side)
-    try {
-      await sendQuoteEmail(result.data);
-    } catch (emailErr) {
-      console.error("SMTP email failed (non-critical, Web3Forms handles delivery):", emailErr);
+    const data = result.data;
+
+    const w3fRes = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        access_key: "b1511371-e777-4260-9502-7d3533931fea",
+        subject: `[QUOTE] ${data.companyName} — ${data.productsOfInterest}`,
+        from_name: `${data.contactName} (${data.companyName})`,
+        email: data.email,
+        phone: data.phone || "N/A",
+        country: data.country,
+        products: data.productsOfInterest,
+        quantity: data.estimatedQuantity,
+        lead_time: data.targetLeadTime || "N/A",
+        notes: data.notes || "N/A",
+      }),
+    });
+
+    if (!w3fRes.ok) {
+      console.error("Web3Forms error:", await w3fRes.text());
+      return NextResponse.json(
+        { error: "Failed to send quote request. Please try emailing us directly." },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ ok: true });
