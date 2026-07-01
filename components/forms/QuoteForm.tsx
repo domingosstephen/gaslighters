@@ -28,23 +28,40 @@ export function QuoteForm() {
   const onSubmit = async (data: QuoteFormData) => {
     setServerError("");
     try {
-      const res = await fetch("/api/quote", {
+      const message = [
+        `Company: ${data.companyName}`,
+        `Contact: ${data.contactName}`,
+        `Email: ${data.email}`,
+        `Phone: ${data.phone || "N/A"}`,
+        `Country: ${data.country}`,
+        `Products: ${data.productsOfInterest}`,
+        `Quantity: ${data.estimatedQuantity}`,
+        `Lead Time: ${data.targetLeadTime || "N/A"}`,
+        `Notes: ${data.notes || "N/A"}`,
+      ].join("\n");
+
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          access_key: "b1511371-e777-4260-9502-7d3533931fea",
+          subject: `[QUOTE] ${data.companyName} — ${data.productsOfInterest}`,
+          from_name: `${data.contactName} (${data.companyName})`,
+          replyto: data.email,
+          message,
+        }),
       });
 
-      if (!res.ok) {
-        const json = await res.json().catch(() => null);
-        throw new Error(json?.error || "Something went wrong.");
+      const json = await res.json().catch(() => null);
+
+      if (!res.ok || !json?.success) {
+        throw new Error("Something went wrong.");
       }
 
       setSubmittedEmail(data.email);
       setSubmitted(true);
-    } catch (err) {
-      setServerError(
-        err instanceof Error ? err.message : "Something went wrong."
-      );
+    } catch {
+      setServerError("Failed to send quote request. Please try emailing us directly.");
     }
   };
 
