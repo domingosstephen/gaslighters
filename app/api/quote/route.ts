@@ -20,6 +20,18 @@ export async function POST(request: Request) {
 
     const data = result.data;
 
+    const message = [
+      `Company: ${data.companyName}`,
+      `Contact: ${data.contactName}`,
+      `Email: ${data.email}`,
+      `Phone: ${data.phone || "N/A"}`,
+      `Country: ${data.country}`,
+      `Products: ${data.productsOfInterest}`,
+      `Quantity: ${data.estimatedQuantity}`,
+      `Lead Time: ${data.targetLeadTime || "N/A"}`,
+      `Notes: ${data.notes || "N/A"}`,
+    ].join("\n");
+
     const w3fRes = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -27,18 +39,15 @@ export async function POST(request: Request) {
         access_key: "b1511371-e777-4260-9502-7d3533931fea",
         subject: `[QUOTE] ${data.companyName} — ${data.productsOfInterest}`,
         from_name: `${data.contactName} (${data.companyName})`,
-        email: data.email,
-        phone: data.phone || "N/A",
-        country: data.country,
-        products: data.productsOfInterest,
-        quantity: data.estimatedQuantity,
-        lead_time: data.targetLeadTime || "N/A",
-        notes: data.notes || "N/A",
+        replyto: data.email,
+        message,
       }),
     });
 
-    if (!w3fRes.ok) {
-      console.error("Web3Forms error:", await w3fRes.text());
+    const w3fJson = await w3fRes.json().catch(() => null);
+
+    if (!w3fRes.ok || !w3fJson?.success) {
+      console.error("Web3Forms error:", w3fJson);
       return NextResponse.json(
         { error: "Failed to send quote request. Please try emailing us directly." },
         { status: 500 }
